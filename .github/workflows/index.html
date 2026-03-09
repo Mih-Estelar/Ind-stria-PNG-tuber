@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indústria PNGTuber - Tudo para PNGTubers Profissionais</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* HEADER FIXO */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(220, 20, 60, 0.2);
+      z-index: 1000;
+    }
+
+    .header-top {
+      text-align: center;
+      padding: 1rem 1rem 0.5rem;
+      border-bottom: 2px solid #dc143c;
+    }
+
+    .header-top img {
+      width: 200px;
+      height: 100px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .slogan {
+      margin-top: 0.5rem;
+      color: #dc143c;
+      font-weight: bold;
+    }
+
+    /* MENU DE ABAS */
+    .nav-tabs {
+      display: flex;
+      border-top: 2px solid #dc143c;
+      border-bottom: 2px solid #dc143c;
+      background: #fff;
+    }
+
+    .nav-tab {
+      flex: 1;
+      text-align: center;
+      padding: 0.8rem;
+      cursor: pointer;
+      font-weight: bold;
+      color: #dc143c;
+      border-right: 1px solid #dc143c;
+      transition: 0.3s;
+    }
+
+    .nav-tab:last-child {
+      border-right: none;
+    }
+
+    .nav-tab.active {
+      background: #dc143c;
+      color: #fff;
+    }
+
+    .nav-tab:hover:not(.active) {
+      background: #ffe6e6;
+    }
+
+    /* CONTEÚDO PRINCIPAL */
+    .main-content {
+      max-width: 1200px;
+      margin: 210px auto 2rem;
+      padding: 1rem;
+    }
+
+    section {
+      display: none;
+      animation: fade 0.4s ease-in;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    @keyframes fade {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    h1 {
+      color: #dc143c;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      color: #dc143c;
+      margin-bottom: 0.8rem;
+    }
+
+    /* ABA 1 – SOBRE E NOTÍCIAS */
+    .card {
+      background: #fff;
+      border: 2px solid #dc143c;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .news-item {
+      border: 1px solid #dc143c;
+      border-radius: 8px;
+      padding: 1rem;
+      background: #fff7f7;
+    }
+
+    /* ABA 2 – PNGS PRONTOS */
+    .png-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 1rem;
+    }
+
+    .png-card {
+      border: 2px solid #dc143c;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #fff;
+      transition: 0.3s;
+    }
+
+    .png-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(220,20,60,0.3);
+    }
+
+    .png-thumb-wrapper {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      background: #ccc;
+    }
+
+    .png-thumb-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 26px;
+    }
+
+    .png-info {
+      text-align: center;
+      padding: 0.8rem;
+      background: #dc143c;
+      color: #fff;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    /* ABA 3 – PRODUTOS */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 1rem;
+    }
+
+    .product-card {
+      border: 2px solid #dc143c;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .product-img {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(45deg,#dc143c,#ff0000);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+
+    .product-body {
+      padding: 1rem;
+    }
+
+    .price {
+      margin: 0.6rem 0;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #dc143c;
+    }
+
+    .btn {
+      display: inline-block;
+      border: none;
+      border-radius: 20px;
+      padding: 0.6rem 1.4rem;
+      background: #dc143c;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: 0.3s;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background: #ff0000;
+    }
+
+    /* CARRINHO FLUTUANTE */
+    .cart-float {
+      position: fixed;
+      top: 230px;
+      right: 1rem;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #dc143c;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(220,20,60,0.4);
+      z-index: 1100;
+    }
+
+    .cart-float span {
+      display: block;
+    }
+
+    /* ABA 4 – COMISSÕES */
+    .form-box {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: bold;
+      color: #dc143c;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 6px;
+      border: 1px solid #dc143c;
+      font-size: 0.95rem;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+
+    .pricing-table th,
+    .pricing-table td {
+      border: 1px solid #dc143c;
+      padding: 0.6rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .pricing-table th {
+      background: #dc143c;
+      color: #fff;
+    }
+
+    /* MODAL DE VÍDEO */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 1200;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-content {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .modal-content video {
+      width: 100%;
+      max-height: 70vh;
+      border-radius: 8px;
+    }
+
+    .modal-close {
+      margin-top: 0.5rem;
+      text-align: right;
+    }
+
+    .modal-close button {
+      border: none;
+      background: #dc143c;
+      color: #fff;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 768px) {
+      .nav-tabs {
+        flex-direction: column;
+      }
+      .main-content {
+        margin-top: 260px;
+      }
+      .cart-float {
+        top: auto;
+        bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-top">
+      <!-- SUBSTITUA POR SUA LOGO REAL -->
+      <img src="https://via.placeholder.com/200x100/dc143c/ffffff?text=Indústria+PNGTuber" alt="Indústria PNGTuber">
+      <div class="slogan">Tudo para PNGTubers Profissionais</div>
+    </div>
+
+    <nav class="nav-tabs">
+      <div class="nav-tab active" data-tab="sobre">📢 Sobre e Notícias</div>
+      <div class="nav-tab" data-tab="pngs">🖼️ PNGs Prontos</div>
+      <div class="nav-tab" data-tab="produtos">🛒 Venda</div>
+      <div class="nav-tab" data-tab="comissoes">✨ Comissões</div>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <!-- ABA 1: SOBRE E NOTÍCIAS -->
+    <section id="sobre" class="active">
+      <h1>Indústria PNGTuber</h1>
+      
+      <div class="card">
+        <h2>🎯 O que são PNGTubers?</h2>
+        <p>PNGTubers são imagens 2D usadas em streams que <strong>reagem à sua voz</strong> através da troca automática de expressões (idle, feliz, triste, bravo, etc.).</p>
+        <p style="margin-top: 0.8rem;">Criadas em ferramentas como <strong>Picrew</strong> e <strong>Charat.me</strong>, elas são perfeitas para streamers iniciantes e profissionais que querem identidade visual sem complicações!</p>
+      </div>
+
+      <div class="card">
+        <h2>📰 Notícias Recentes</h2>
+        <div class="news-grid">
+          <div class="news-item">
+            <h3>09/03/2026</h3>
+            <p><strong>15 novos PNGTubers lançados!</strong><br>Modelos exclusivos com até 12 expressões.</p>
+          </div>
+          <div class="news-item">
+            <h3>07/03/2026</h3>
+            <p><strong>Integração TikTok Live</strong><br>PNGTubers agora funcionam perfeitamente no TikTok!</p>
+          </div>
+          <div class="news-item">
+            <h3>05/03/2026</h3>
+            <p><strong>Picrew lança base oficial</strong><br>Nova base PNGTuber gratuita com 20+ expressões.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 2: PNGs PRONTOS -->
+    <section id="pngs">
+      <h1>Galeria PNGTubers Prontos</h1>
+      <p style="text-align:center;margin-bottom:1.5rem;font-size:1.1rem;">Clique na ▶ para ver todas as expressões em vídeo!</p>
+
+      <div class="png-grid">
+        <div class="png-card" onclick="openVideo('video1')">
+          <div class="png-thumb-wrapper">
+            <img src="https://via.placeholder.com/300x180/dc143c/fff?text=Akira-chan" alt="Akira">
+            <div class="play-icon">▶</div>
+          </div>
+          <div class="png-info">Akira-chan<br><small>8 expressões</small></div>
+        </div>
+
+        <div class="png-card" onclick="openVideo('video2')">
+          <div class="png-thumb-wrapper">
+            <img src="https://via.placeholder.com/300x180/ff1744/fff?text=Luna+Foxy" alt="Luna">
+            <div class="play-icon">▶</div>
+          </div>
+          <div class="png-info">Luna Foxy<br><small>10 expressões</small></div>
+        </div>
+
+        <div class="png-card" onclick="openVideo('video3')">
+          <div class="png-thumb-wrapper">
+            <img src="https://via.placeholder.com/300x180/dc143c/fff?text=Drake+Wolf" alt="Drake">
+            <div class="play-icon">▶</div>
+          </div>
+          <div class="png-info">Drake Wolf<br><small>12 expressões</small></div>
+        </div>
+
+        <div class="png-card" onclick="openVideo('video4')">
+          <div class="png-thumb-wrapper">
+            <img src="https://via.placeholder.com/300x180/ff0000/fff?text=Mimi+Cat" alt="Mimi">
+            <div class="play-icon">▶</div>
+          </div>
+          <div class="png-info">Mimi Cat<br><small>8 expressões</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 3: PRODUTOS -->
+    <section id="produtos">
+      <h1>Nossos Produtos</h1>
+
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-img">🎥</div>
+          <div class="product-body">
+            <h2>Capas de Vídeo</h2>
+            <p>Capas profissionais para YouTube, Twitch e TikTok com seu PNGTuber.</p>
+            <div class="price">R$ 97,00</div>
+            <button class="btn" onclick="addToCart('Capas de Vídeo', 97)">➕ Carrinho</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img">✂️</div>
+          <div class="product-body">
+            <h2>Edição de Vídeo</h2>
+            <p>Edição completa com transições e sincronia perfeita do PNGTuber.</p>
+            <div class="price">R$ 197,00</div>
+            <button class="btn" onclick="addToCart('Edição de Vídeo', 197)">➕ Carrinho</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img">🖼️</div>
+          <div class="product-body">
+            <h2>PNGTuber Personalizado</h2>
+            <p>PNG exclusivo com 8+ expressões feitas especialmente para você.</p>
+            <div class="price">R$ 497,00</div>
+            <button class="btn" onclick="addToCart('PNGTuber Personalizado', 497)">➕ Carrinho</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 4: COMISSÕES -->
+    <section id="comissoes">
+      <h1>Área de Comissões</h1>
+      <p style="text-align:center;margin-bottom:2rem;font-size:1.1rem;">
+        Artistas e criadores: <strong>ganhe dinheiro</strong> trabalhando conosco!
+      </p>
+
+      <div class="card form-box">
+        <h2>🚀 Envie sua Proposta</h2>
+        <form onsubmit="submitCommission(event)">
+          <div class="form-group">
+            <label>👤 Nome Completo</label>
+            <input type="text" id="nomeComissao" required>
+          </div>
+
+          <div class="form-group">
+            <label>🎨 Portfólio (link)</label>
+            <input type="url" id="portfolioComissao" placeholder="https://seu-portfolio.com" required>
+          </div>
+
+          <div class="form-group">
+            <label>🛠️ Tipo de Serviço</label>
+            <select id="servicoComissao" required>
+              <option value="">Selecione...</option>
+              <option>Edição PNG</option>
+              <option>Animação Live2D</option>
+              <option>Arte Digital</option>
+              <option>Edição de Vídeo</option>
+              <option>Roteirização</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>📱 Contato (WhatsApp)</label>
+            <input type="tel" id="contatoComissao" placeholder="(43) 99999-9999" required>
+          </div>
+
+          <button class="btn" type="submit">📲 Enviar Proposta no WhatsApp</button>
+        </form>
+
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th>Serviço</th>
+              <th>Faixa de Preço</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PNGTuber Básico</td>
+              <td>R$ 50 - R$ 150</td>
+            </tr>
+            <tr>
+              <td>PNGTuber Premium</td>
+              <td>R$ 200 - R$ 500</td>
+            </tr>
+            <tr>
+              <td>Edição Vídeo</td>
+              <td>R$ 100 - R$ 300</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="margin-top:1rem;text-align:center;color:#dc143c;font-weight:bold;">
+          💎 <strong>Benefícios:</strong> Pagamento rápido, clientes recorrentes e destaque na plataforma!
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- CARRINHO FLUTUANTE -->
+  <div class="cart-float" onclick="finishWhatsApp()">
+    <span>🛒</span>
+    <span id="cartCount">0</span>
+    <span id="cartTotal">R$ 0,00</span>
+  </div>
+
+  <!-- MODAL VÍDEO -->
+  <div id="videoModal" class="modal-overlay">
+    <div class="modal-content">
+      <video id="modalVideo" controls></video>
+      <div class="modal-close">
+        <button onclick="closeVideo()">❌ Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Navegação entre abas
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Vídeos (substitua pelas URLs reais)
+    const videoSources = {
+      video1: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
+      video2: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
+      video3: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
+      video4: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4'
+    };
+
+    function openVideo(id) {
+      const modal = document.getElementById('videoModal');
+      const video = document.getElementById('modalVideo');
+      video.src = videoSources[id];
+      modal.style.display = 'flex';
+      video.play();
+    }
+
+    function closeVideo() {
+      const modal = document.getElementById('videoModal');
+      const video = document.getElementById('modalVideo');
+      video.pause();
+      video.currentTime = 0;
+      modal.style.display = 'none';
+    }
+
+    // Carrinho de compras
+    let cart = [];
+    function addToCart(name, price) {
+      cart.push({name, price});
+      updateCartDisplay();
+      // Notificação visual
+      const notif = document.createElement('div');
+      notif.style.cssText = 'position:fixed;top:20px;right:20px;background:#dc143c;color:white;padding:1rem;border-radius:10px;z-index:2000';
+      notif.textContent = `${name} adicionado!`;
+      document.body.appendChild(notif);
+      setTimeout(() => notif.remove(), 3000);
+    }
+
+    function updateCartDisplay() {
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      document.getElementById('cartCount').textContent = cart.length;
+      document.getElementById('cartTotal').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+    }
+
+    function finishWhatsApp() {
+      if (cart.length === 0) {
+        alert('Carrinho vazio!');
+        return;
+      }
+      const itemsList = cart.map(item => `${item.name} - R$ ${item.price}`).join('\n');
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      const message = `🛒 *PEDIDO INDÚSTRIA PNGTUBER* 🛒%0A%0A${itemsList}%0A%0A💰 *Total: R$ ${total.toFixed(2)}*%0A%0AEntrego quando?`;
+      window.open(`https://wa.me/554396637473?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    // FORMULÁRIO COMISSÕES - ENVIA DIRETO WHATSAPP
+    function submitCommission(event) {
+      event.preventDefault();
+      
+      const nome = document.getElementById('nomeComissao').value;
+      const portfolio = document.getElementById('portfolioComissao').value;
+      const servico = document.getElementById('servicoComissao').value;
+      const contato = document.getElementById('contatoComissao').value;
+
+      const message = 
+        `✨ *PROPOSTA DE COMISSÃO* ✨%0A%0A` +
+        `👤 *Nome:* ${nome}%0A` +
+        `🎨 *Portfólio:* ${portfolio}%0A` +
+        `🛠️ *Serviço:* ${servico}%0A` +
+        `📱 *Contato:* ${contato}%0A%0A` +
+        `📩 Enviado pelo site Indústria PNGTuber%0A%0A` +
+        `Quais são os próximos passos?`;
+
+      const url = `https://wa.me/554396637473?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+      
+      // Limpa formulário
+      event.target.reset();
+    }
+  </script>
+</body>
+</html>
