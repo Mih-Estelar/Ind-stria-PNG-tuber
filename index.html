@@ -138,6 +138,53 @@
       padding: 1rem;
       background: #fff7f7;
     }
+   .png-showcase {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: transparent;
+    margin-top: 2rem;
+}
+
+.png-image {
+    width: 500px;
+    height: 570px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.png-card {
+    background: #FFFFFF;
+    border: 2px solid #DC143C;
+    border-radius: 10px;
+    padding: 16px 20px;
+    flex: 1;
+    max-width: 280px;
+    box-shadow: 0 6px 20px rgba(220, 20, 60, 0.25);
+    height: 100px;
+}
+
+.png-card h4 {
+    color: #DC143C;
+    font-size: 12px;
+    margin: 0 0 4px 0;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.png-card h3 {
+    color: #DC143C;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    font-weight: bold;
+}
+
+.png-card p {
+    font-size: 14px;
+    margin: 0;
+    color: #555;
+}
 
     /* ABA 2 – PNGS PRONTOS */
     .png-grid {
@@ -189,7 +236,6 @@
       color: #fff;
       font-size: 26px;
     }
-
     .png-info {
       text-align: center;
       padding: 0.8rem;
@@ -198,6 +244,7 @@
       font-weight: bold;
       font-size: 0.95rem;
     }
+    
 
     /* ABA 3 – PRODUTOS */
     .products-grid {
@@ -577,7 +624,15 @@
             <p><strong>Picrew lança base oficial</strong><br>Nova base PNGTuber gratuita com 20+ expressões.</p>
           </div>
         </div>
-      </div>
+      </div><div class="png-showcase">
+    <img src="sua-imagem.png" alt="PNGTuber" class="png-image">
+    <div class="png-card">
+         <h4>Notícia</h4>
+        <h3>PNGTuber Profissional</h3>
+        <p>8 expressões + PSD</p>
+    </div>
+</div>
+
     </section>
 
     <!-- ABA 2: PNGs PRONTOS -->
@@ -706,7 +761,6 @@
               <td>Criador de site</td>
               <td>R$ 300 - R$ 500</td>
                <tr>
-                
                </tr>
              <td>Dublador Novato</td>
               <td>R$ 50/min</td>
