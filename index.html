@@ -439,6 +439,227 @@
     text-align: center;
     margin-bottom: 3rem;
 }
+/* SÓ ABA COMISSÕES + IMAGEM VERMELHA JPEG */
+#comissoes .funcionarios-comissoes {
+    position: relative;
+    padding: 60px 20px;
+    margin: 40px 0;
+    border-radius: 20px;
+    background: #f8f9fa;
+}
+
+#comissoes {
+    /* Sua imagem de fundo original continua */
+    background-image: url('fundooda4.jpeg');
+    position: relative;
+}
+#comissoes .bg-vermelho {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* VERMELHO SOLIDO - SEM TRANSPARÊNCIA */
+    background: #DC143C;  /* ou sua PNG sem opacity */
+    /* opacity: 1; ← TOTALMENTE OPAQUE */
+    z-index: 1;
+}
+#comissoes .funcionario p {
+    color: white !important;  /* ← BRANCO */
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);  /* Sombra preta para legibilidade */
+}
+
+#comissoes::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* VERMELHO POR CIMA */
+    background: url('efeitosred-overlay.png') center/cover;
+      opacity: 1;  /* ← SEMI-TRANSPARENTE = 1 (SOLIDO) */
+    z-index: 1;
+}
+
+#comissoes .funcionarios-comissoes {
+    position: relative;
+    z-index: 3; /* Funcionários por cima do vermelho */
+}
+
+
+#comissoes .funcionarios-comissoes > * {
+    position: relative;
+    z-index: 2;
+}
+
+#comissoes .titulo-funcionarios {
+    color: #ffffff;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+#comissoes .categoria {
+    margin-bottom: 60px;
+}
+
+#comissoes .categoria h3 {
+    color: #ffffff;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+#comissoes .grid-funcionarios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#comissoes .funcionario {
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+#comissoes .funcionario:hover {
+    transform: translateY(-10px);
+}
+
+#comissoes .foto {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    position: relative;
+    overflow: hidden;
+    border: 5px solid white;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+#comissoes .funcionarios-comissoes {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+#comissoes .categoria {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+#comissoes .grid-funcionarios {
+    background: transparent !important;
+}
+
+#comissoes .funcionario {
+    background: transparent !important;
+    border: none !important;
+}
+
+.foto {
+    width: 140px !important;
+    height: 140px !important;
+    border-radius: 50% !important;
+    margin: 0 auto 15px;
+    background-size: cover !important;     /* ← PREENCHE TODO CÍRCULO */
+    background-position: center !important; /* ← CENTRALIZA FOTO */
+    background-repeat: no-repeat;
+    border: 5px solid white;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    overflow: hidden !important;           /* ← CORTA EXCESSO DA FOTO */
+}
+
+
+
+/* CORES DIFERENTES PARA CADA CATEGORIA */
+#comissoes .categoria:nth-child(3) .foto { background: linear-gradient(45deg, #FF6B6B, #FF8E8E); }
+#comissoes .categoria:nth-child(3) .foto::after { content: 'LUNA'; }
+#comissoes .categoria:nth-child(3) .funcionario:nth-child(2) .foto { background: linear-gradient(45deg, #FF1493, #FF69B4); }
+#comissoes .categoria:nth-child(3) .funcionario:nth-child(2) .foto::after { content: 'KIRA'; }
+#comissoes .categoria:nth-child(3) .funcionario:nth-child(3) .foto { background: linear-gradient(45deg, #9370DB, #BA55D3); }
+#comissoes .categoria:nth-child(3) .funcionario:nth-child(3) .foto::after { content: 'MIKA'; }
+#comissoes .categoria:nth-child(3) .funcionario:nth-child(4) .foto { background: linear-gradient(45deg, #00CED1, #20B2AA); }
+#comissoes .categoria:nth-child(3) .funcionario:nth-child(4) .foto::after { content: 'YUKI'; }
+
+#comissoes .categoria:nth-child(5) .foto { background: linear-gradient(45deg, #28a745, #20c997); }
+#comissoes .categoria:nth-child(5) .foto::after { content: 'MAX'; }
+/* Continue para outros... */
+
+#comissoes .foto::after {
+    content: attr(data-nome);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    z-index: 2;
+}
+.foto {
+    width: 140px !important;
+    height: 140px !important;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    background-size: cover !important;
+    background-position: center !important;
+    border: 5px solid white;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* REMOVE QUALQUER TEXTO que aparece na foto */
+.foto::after,
+.foto::before {
+    content: none !important;
+}
+/* REMOVER BOLA/HOVER VERMELHO */
+#comissoes .funcionario:hover .foto::after,
+#comissoes .funcionario:hover .foto::before,
+.foto::after,
+.foto::before {
+    display: none !important;
+    content: none !important;
+}
+
+/* OU SIMPLIFIQUE o hover */
+#comissoes .funcionario:hover .foto {
+    transform: scale(1.05);  /* Só cresce - SEM vermelho */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+/* *** FORÇA AS FOTOS REAIS APARECIREM *** */
+#comissoes .foto {
+    background-image: none !important;
+}
+
+/* *** APLICAÇÃO DAS FOTOS (ajuste os caminhos) *** */
+#comissoes .funcionario:nth-of-type(1) .foto { background-image: url('fotos/luna.jpg') !important; }
+#comissoes .funcionario:nth-of-type(2) .foto { background-image: url('fotos/kira.jpg') !important; }
+#comissoes .funcionario:nth-of-type(3) .foto { background-image: url('fotos/mika.jpg') !important; }
+#comissoes .funcionario:nth-of-type(4) .foto { background-image: url('fotos/yuki.jpg') !important; }
+
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .grid-funcionarios {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+    }
+    
+    .foto {
+        width: 110px;
+        height: 110px;
+        font-size: 0.9rem;
+    }
+}
 
 /* CARDS PARCERIAS */
 .partners-grid {
@@ -850,8 +1071,74 @@
           💎 <strong>Benefícios:</strong> Pagamento rápido, clientes recorrentes e destaque na plataforma!
         </p>
       </div>
+      <!-- COLE DENTRO de <section id="comissoes"> -->
+<div class="funcionarios-comissoes">
+    <div class="bg-vermelho"></div>
+    
+    <h2 class="titulo-funcionarios">FUNCIONÁRIOS</h2>
+    
+    <!-- ARTISTAS -->
+    <div class="categoria">
+        <h3>ARTISTAS</h3>
+        <div class="grid-funcionarios">
+            <div class="funcionario" onclick="window.open('https://tiktok.com/@luna_art','_blank')">
+                <div class="foto"></div>
+                <p>@luna_art</p>
+            </div>
+            <div class="funcionario" onclick="window.open('https://tiktok.com/@kira_png','_blank')">
+                <div class="foto"></div>
+                <p>@kira_png</p>
+            </div>
+            <div class="funcionario" onclick="window.open('https://tiktok.com/@mika_star','_blank')">
+                <div class="foto"></div>
+                <p>@mika_star</p>
+            </div>
+            <div class="funcionario" onclick="window.open('https://tiktok.com/@yuki_draw','_blank')">
+                <div class="foto"></div>
+                <p>@yuki_draw</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDITORES -->
+    <div class="categoria">
+        <h3>EDITORES</h3>
+        <div class="grid-funcionarios">
+            <div class="funcionario" onclick="window.open('https://twitch.tv/edit_max','_blank')">
+                <div class="foto"></div>
+                <p>@edit_max</p>
+            </div>
+            <div class="funcionario" onclick="window.open('https://twitch.tv/clip_studio','_blank')">
+                <div class="foto"></div>
+                <p>@clip_studio</p>
+            </div>
+            <div class="funcionario" onclick="window.open('https://twitch.tv/vid_ace','_blank')">
+                <div class="foto"></div>
+                <p>@vid_ace</p>
+            </div>
+            <div class="funcionario" onclick="window.open('https://twitch.tv/cut_pro','_blank')">
+                <div class="foto"></div>
+                <p>@cut_pro</p>
+            </div>
+        </div>
+    </div>
+    <!-- PROGRAMADORES -->
+<div class="categoria">
+    <h3>PROGRAMADORES</h3>
+    <div class="grid-funcionarios">
+        <div class="funcionario" onclick="window.open('https://tiktok.com/@mih_estelar','_blank')">
+   <div class="foto" style="background-image: url('mih-estelar.png') !important;"></div>
+    <p style="color: white; font-weight: bold">@MIH_Estelar</p>
+</div>
+
+        
+       
+    </div>
+</div>
+
     </section>
   </main>
+  
 
   <!-- CARRINHO FLUTUANTE -->
   <div class="cart-float" onclick="finishWhatsApp()">
