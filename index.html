@@ -347,6 +347,7 @@
     }
 
     /* ABA 4 – COMISSÕES */
+    
     .form-box {
       max-width: 500px;
       margin: 0 auto;
@@ -390,6 +391,20 @@
       background: #dc143c;
       color: #fff;
     }
+    
+    /* FORMULÁRIO NO LUGAR CERTO - ABAIXO DAS ABAS */
+#comissoes .card.form-box {
+    position: relative !important;
+    z-index: 10 !important;  /* ← Baixo, fica abaixo das abas */
+}
+
+#comissoes .form-group input,
+#comissoes .form-group select,
+#comissoes .form-group button {
+    pointer-events: auto !important;
+    z-index: 11 !important;
+}
+
  /* SEM OVERLAY ESCURO - imagem limpa no fundo */
 #comissoes {
     position: relative;
@@ -953,36 +968,64 @@
     <section id="produtos">
       <h1>Nossos Produtos</h1>
 
-      <div class="products-grid">
-        <div class="product-card">
-          <div class="product-img">🎥</div>
-          <div class="product-body">
+<div class="products-grid">
+    <!-- 1. Capas de Vídeo -->
+    <div class="product-card">
+        <div class="product-img">🎥</div>
+        <div class="product-body">
             <h2>Capas de Vídeo</h2>
             <p>Capas profissionais para YouTube, Twitch e TikTok com seu PNGTuber.</p>
             <div class="price">R$ 97,00</div>
             <button class="btn" onclick="addToCart('Capas de Vídeo', 97)">➕ Carrinho</button>
-          </div>
         </div>
+    </div>
 
-        <div class="product-card">
-          <div class="product-img">✂️</div>
-          <div class="product-body">
+    <!-- 2. Edição de Vídeo -->
+    <div class="product-card">
+        <div class="product-img">✂️</div>
+        <div class="product-body">
             <h2>Edição de Vídeo</h2>
             <p>Edição completa com transições e sincronia perfeita do PNGTuber.</p>
             <div class="price">R$ 197,00</div>
             <button class="btn" onclick="addToCart('Edição de Vídeo', 197)">➕ Carrinho</button>
-          </div>
         </div>
+    </div>
 
-        <div class="product-card">
-          <div class="product-img">🖼️</div>
-          <div class="product-body">
+    <!-- 3. PNGTuber Personalizado -->
+    <div class="product-card">
+        <div class="product-img">🖼️</div>
+        <div class="product-body">
             <h2>PNGTuber Personalizado</h2>
             <p>PNG exclusivo com 8+ expressões feitas especialmente para você.</p>
             <div class="price">R$ 497,00</div>
             <button class="btn" onclick="addToCart('PNGTuber Personalizado', 497)">➕ Carrinho</button>
-          </div>
         </div>
+    </div>
+
+    <!-- 4. Vtuber -->
+    <div class="product-card">
+        <div class="product-img">🖼️</div>
+        <div class="product-body">
+            <h2>Vtuber</h2>
+            <p>Modelo Vtuber completo e personalizado.</p>
+            <div class="price">R$ 100,00</div>
+            <button class="btn" onclick="addToCart('Modelo Vtuber', 100)">➕ Carrinho</button>
+        </div>
+    </div>
+
+    <!-- 5. Animação -->
+    <div class="product-card">
+        <div class="product-img">🎥</div>
+        <div class="product-body">
+            <h2>Animação</h2>
+            <p>Animação por minuto de alta qualidade.</p>
+            <div class="price">R$ 100,00</div>
+            <button class="btn" onclick="addToCart('Animação por minuto', 100)">➕ Carrinho</button>
+        </div>
+    </div>
+</div>
+
+
       </div>
     </section>
 
@@ -1044,6 +1087,10 @@
               <td>PNGTuber Premium</td>
               <td>R$ 200 - R$ 500</td>
             </tr>
+                        <tr>
+              <td>PNG tube animado Com 4 expressão</td>
+              <td>R$ 120/min</td>
+            </tr>
             <tr>
               <td>Edição Vídeo</td>
               <td>R$ 100 - R$ 300</td>
@@ -1062,11 +1109,11 @@
             </tr>
             <tr>
               <td>Dublador Profissiona</td>
-              <td>R$ 120/min</td>
+              <td>R$ 120 </td>
             </tr>
           </tbody>
         </table>
-
+ 
         <p style="margin-top:1rem;text-align:center;color:#dc143c;font-weight:bold;">
           💎 <strong>Benefícios:</strong> Pagamento rápido, clientes recorrentes e destaque na plataforma!
         </p>
