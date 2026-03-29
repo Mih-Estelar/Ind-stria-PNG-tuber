@@ -185,6 +185,32 @@
     margin: 0;
     color: #555;
 }
+#sobre {
+    background-image: url('fundo-sobre.png');  /* ← SEU PNG */
+    background-size: 120%;     /* Mais larga que a tela */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;  /* ← MOVE JUNTO COM SCROLL */
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Overlay pra legibilidade */
+#sobre::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+#sobre > * {
+    position: relative;
+    z-index: 2;
+}
 
     /* ABA 2 – PNGS PRONTOS */
 /* ABA 2: CARDS QUADRADOS LADO A LADO */
