@@ -1,695 +1,1509 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>O Trio do Aroça</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indústria PNGTuber - Tudo para PNGTubers Profissionais</title>
+
   <style>
-    /* ---- RESET e cores gerais ---- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #3a1b6b, #1e1e40);
-      color: #fff;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* ---- HEADER / MENU ---- */
-    header {
-      background: #5b2a87;
-      padding: 1rem 2rem;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
-    nav a {
-      color: #fff;
-      font-weight: 600;
-    }
-    nav a:hover {
-      color: #b897fc;
-    }
-
-    /* ---- CONTAINER PRINCIPAL ---- */
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    /* ---- SESSÕES (ocultar todas exceto a ativa) ---- */
-    section {
-      display: none;
-      padding: 2rem 0;
-    }
-    section:target, section:first-of-type:target ~ nav + .container > section:first-of-type {
-      display: block;
-    }
-    section:first-of-type {
-      display: block;
-    }
-
-    /* ---- TÍTULO DE SEÇÃO ---- */
-    h2 {
-      text-align: center;
-      margin-bottom: 1.5rem;
-      color: #d9befb;
-    }
-
-    /* ---- CARDS PADRÃO (todos quadrados) ---- */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-    .card {
+      font-family: Arial, sans-serif;
       background: #ffffff;
-      border-radius: 12px;
-      padding: 1.2rem;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-      text-align: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    }
-    /* FOTO QUADRADA (sem borda redonda) */
-    .card img {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 0;          /* foto totalmente quadrada */
-      border: 4px solid #b897fc;
-      margin-bottom: 0.8rem;
-    }
-    .card h3 {
-      color: #4a166b;
-      margin-bottom: 0.4rem;
-    }
-    .card p {
-      color: #555;
-      margin-bottom: 0.8rem;
-      font-size: 0.95rem;
-    }
-    .card .btn {
-      background: linear-gradient(to right, #5b2a87, #4a34b6);
-      color: white;
-      border: none;
-      border-radius: 24px;
-      padding: 0.6rem 1.2rem;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-    .card .btn:hover {
-      background: linear-gradient(to right, #763dcc, #5f46d8);
+      color: #333;
+      line-height: 1.6;
     }
 
-    /* ---- ABA PERSONAGENS ---- */
-    #personagens {
-      background: #ffffff0d;
-      border-radius: 16px;
-      padding: 1.5rem;
-    }
-    .card-personagem {
-      width: 220px;
-      height: 280px;
-    }
-
-    /* ---- MODAL POPUP (sem JavaScript) ---- */
-    .modal {
+    /* HEADER FIXO */
+    header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(220, 20, 60, 0.2);
       z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: 0.3s ease;
     }
-    .modal:target {
-      opacity: 1;
-      visibility: visible;
-    }
-    .modal-box {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 2rem;
-      max-width: 420px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      position: relative;
-      animation: scaleIn 0.3s ease forwards;
-    }
-    @keyframes scaleIn {
-      from {
-        transform: scale(0.8);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-    .modal-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  font-size: 1.8rem;       /* maior */
-  font-weight: bold;
-  background: #f8f8f8;
-  border: 2px solid #ccc;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #5b2a87;
-  cursor: pointer;
-  transition: background 0.2s ease, border 0.2s ease, transform 0.1s ease;
-}
-.modal-close:hover {
-  background: #5b2a87;
-  color: #fff;
-  transform: scale(1.05);
-}
-    .modal-close:hover {
-      color: #5b2a87;
-    }
-    .modal-content {
+
+    .header-top {
       text-align: center;
-    }
-    /* FOTO QUADRADA NO MODAL TAMBÉM */
-    .modal-content img {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 0;
-      border: 4px solid #b897fc;
-      margin-bottom: 1rem;
-    }
-    .modal-content h3 {
-      color: #4a166b;
-      margin-bottom: 0.4rem;
-    }
-    .modal-content p {
-      color: #555;
-      margin-bottom: 0.4rem;
-      font-size: 0.95rem;
-    }
-    .modal-content .link {
-      color: #5b2a87;
-      text-decoration: underline;
+      padding: 1rem 1rem 0.5rem;
+      border-bottom: 2px solid #dc143c;
     }
 
-    /* ---- ABA PARCERIAS ---- */
-    #parcerias p {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 1.5rem;
-      line-height: 1.6;
-      color: #e0d4ff;
-    }
-    #parcerias .card {
-      background: #ffffff;
-      border: 2px solid #b897fc;
-    }
-
-    /* ---- ABA FUNCIONÁRIOS ---- */
-    #funcionarios {
-      background: #ffffff0d;
-      border-radius: 16px;
-      padding: 1.5rem;
-    }
-.card {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 1.2rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  min-width: 220px;
-  max-width: 220px;
+   .header-top img {
+  width:980px;      /* ← 950px É IMPOSSÍVEL! Use 280px */
+  height: 120px; 
+  object-fit: contain;
+  display: block;
   margin: 0 auto;
 }
 
-.card img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 0;
-  border: 4px solid #b897fc;
-  margin-bottom: 0.8rem;
+  
+
+    .slogan {
+      margin-top: 0.5rem;
+      color: #dc143c;
+      font-weight: bold;
+    }
+
+    /* MENU DE ABAS */
+    .nav-tabs {
+      display: flex;
+      border-top: 2px solid #dc143c;
+      border-bottom: 2px solid #dc143c;
+      background: #fff;
+    }
+
+    .nav-tab {
+      flex: 1;
+      text-align: center;
+      padding: 0.8rem;
+      cursor: pointer;
+      font-weight: bold;
+      color: #dc143c;
+      border-right: 1px solid #dc143c;
+      transition: 0.3s;
+    }
+
+    .nav-tab:last-child {
+      border-right: none;
+    }
+
+    .nav-tab.active {
+      background: #dc143c;
+      color: #fff;
+    }
+
+    .nav-tab:hover:not(.active) {
+      background: #ffe6e6;
+    }
+
+    /* CONTEÚDO PRINCIPAL */
+    .main-content {
+      max-width: 1200px;
+      margin: 210px auto 2rem;
+      padding: 1rem;
+    }
+
+    section {
+      display: none;
+      animation: fade 0.4s ease-in;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    @keyframes fade {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    h1 {
+      color: #dc143c;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      color: #dc143c;
+      margin-bottom: 0.8rem;
+    }
+
+    /* ABA 1 – SOBRE E NOTÍCIAS */
+    .card {
+      background: #fff;
+      border: 2px solid #dc143c;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .news-item {
+      border: 1px solid #dc143c;
+      border-radius: 8px;
+      padding: 1rem;
+      background: #fff7f7;
+    }
+   .png-showcase {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: transparent;
+    margin-top: 2rem;
 }
 
-.cards {
+.png-image {
+    width: 500px;
+    height: 570px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.png-card {
+    background: #FFFFFF;
+    border: 2px solid #DC143C;
+    border-radius: 10px;
+    padding: 16px 20px;
+    flex: 1;
+    max-width: 280px;
+    box-shadow: 0 6px 20px rgba(220, 20, 60, 0.25);
+    height: 100px;
+}
+
+.png-card h4 {
+    color: #DC143C;
+    font-size: 12px;
+    margin: 0 0 4px 0;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.png-card h3 {
+    color: #DC143C;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    font-weight: bold;
+}
+
+.png-card p {
+    font-size: 14px;
+    margin: 0;
+    color: #555;
+}
+#sobre {
+    background-image: url('fundo-sobre.png');  /* ← SEU PNG */
+    background-size: 120%;     /* Mais larga que a tela */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;  /* ← MOVE JUNTO COM SCROLL */
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Overlay pra legibilidade */
+#sobre::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+#sobre > * {
+    position: relative;
+    z-index: 2;
+}
+
+    /* ABA 2 – PNGS PRONTOS */
+/* ABA 2: CARDS QUADRADOS LADO A LADO */
+.png-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.png-card {
+    background: #fff;
+    border: 2px solid #DC143C;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: 1/1;
+}
+
+.png-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(220, 20, 60, 0.25);
+}
+
+.png-thumb-wrapper {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.png-thumb-wrapper img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+
+.play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.95);
+    color: #DC143C;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: bold;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+}
+
+.png-info {
+    padding: 1rem;
+    text-align: center;
+    background: #fff;
+    flex-shrink: 0;
+}
+
+.png-info small {
+    color: #DC143C;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: block;
+    margin-top: 0.3rem;
+}
+
+    /* ABA 3 – PRODUTOS */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 1rem;
+    }
+
+    .product-card {
+      border: 2px solid #dc143c;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .product-img {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(45deg,#dc143c,#ff0000);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+
+    .product-body {
+      padding: 1rem;
+    }
+
+    .price {
+      margin: 0.6rem 0;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #dc143c;
+    }
+
+    .btn {
+      display: inline-block;
+      border: none;
+      border-radius: 20px;
+      padding: 0.6rem 1.4rem;
+      background: #dc143c;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: 0.3s;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background: #ff0000;
+    }
+
+    /* CARRINHO FLUTUANTE */
+    .cart-float {
+      position: fixed;
+      top: 230px;
+      right: 1rem;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #dc143c;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(220,20,60,0.4);
+      z-index: 1100;
+    }
+
+    .cart-float span {
+      display: block;
+    }
+
+    /* ABA 4 – COMISSÕES */
+    
+    .form-box {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: bold;
+      color: #dc143c;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 6px;
+      border: 1px solid #dc143c;
+      font-size: 0.95rem;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+
+    .pricing-table th,
+    .pricing-table td {
+      border: 1px solid #dc143c;
+      padding: 0.6rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .pricing-table th {
+      background: #dc143c;
+      color: #fff;
+    }
+    
+    /* FORMULÁRIO NO LUGAR CERTO - ABAIXO DAS ABAS */
+#comissoes .card.form-box {
+    position: relative !important;
+    z-index: 10 !important;  /* ← Baixo, fica abaixo das abas */
+}
+
+#comissoes .form-group input,
+#comissoes .form-group select,
+#comissoes .form-group button {
+    pointer-events: auto !important;
+    z-index: 11 !important;
+}
+
+ /* SEM OVERLAY ESCURO - imagem limpa no fundo */
+#comissoes {
+    position: relative;
+    min-height: 100vh;
+    background-image: url('fundooda4.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.commission-form {
+    position: relative;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.98);
+    max-width: 500px;
+    margin: 4rem auto;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+}
+
+/* TÍTULOS MAIS VIVOS */
+#comissoes h1,
+#comissoes p {
+    color: #ff0000 !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    font-weight: bold !important;
+    z-index: 11 !important;
+    position: relative;
+}
+
+/* Ou mais específico */
+.commission-title {
+    color: #FFFFFF !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+    font-weight: 700 !important;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.commission-subtitle {
+    color: #F0F0F0 !important;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+/* SÓ ABA COMISSÕES + IMAGEM VERMELHA JPEG */
+#comissoes .funcionarios-comissoes {
+    position: relative;
+    padding: 60px 20px;
+    margin: 40px 0;
+    border-radius: 20px;
+    background: #f8f9fa;
+}
+
+#comissoes {
+    /* Sua imagem de fundo original continua */
+    background-image: url('fundooda4.jpeg');
+    position: relative;
+}
+#comissoes .bg-vermelho {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* VERMELHO SOLIDO - SEM TRANSPARÊNCIA */
+    background: #DC143C;  /* ou sua PNG sem opacity */
+    /* opacity: 1; ← TOTALMENTE OPAQUE */
+    z-index: 1;
+}
+#comissoes .funcionario p {
+    color: white !important;  /* ← BRANCO */
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);  /* Sombra preta para legibilidade */
+}
+
+#comissoes::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* VERMELHO POR CIMA */
+    background: url('efeitosred-overlay.png') center/cover;
+      opacity: 1;  /* ← SEMI-TRANSPARENTE = 1 (SOLIDO) */
+    z-index: 1;
+}
+
+#comissoes .funcionarios-comissoes {
+    position: relative;
+    z-index: 3; /* Funcionários por cima do vermelho */
+}
+
+
+#comissoes .funcionarios-comissoes > * {
+    position: relative;
+    z-index: 2;
+}
+
+#comissoes .titulo-funcionarios {
+    color: #ffffff;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+#comissoes .categoria {
+    margin-bottom: 60px;
+}
+
+#comissoes .categoria h3 {
+    color: #ffffff;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+#comissoes .grid-funcionarios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#comissoes .funcionario {
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+#comissoes .funcionario:hover {
+    transform: translateY(-10px);
+}
+
+#comissoes .foto {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    position: relative;
+    overflow: hidden;
+    border: 5px solid white;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+#comissoes .funcionarios-comissoes {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+#comissoes .categoria {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+#comissoes .grid-funcionarios {
+    background: transparent !important;
+}
+
+#comissoes .funcionario {
+    background: transparent !important;
+    border: none !important;
+}
+
+.foto {
+    width: 140px !important;
+    height: 140px !important;
+    border-radius: 50% !important;
+    margin: 0 auto 15px;
+    background-size: cover !important;     /* ← PREENCHE TODO CÍRCULO */
+    background-position: center !important; /* ← CENTRALIZA FOTO */
+    background-repeat: no-repeat;
+    border: 5px solid white;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    overflow: hidden !important;           /* ← CORTA EXCESSO DA FOTO */
+}
+
+
+
+/* CORES DIFERENTES PARA CADA CATEGORIA */
+#comissoes .categoria:nth-child(3) .foto { background: linear-gradient(45deg, #FF6B6B, #FF8E8E); }
+#comissoes .categoria:nth-child(3) .foto::after { content: 'LUNA'; }
+#comissoes .categoria:nth-child(3) .funcionario:nth-child(2) .foto { background: linear-gradient(45deg, #FF1493, #FF69B4); }
+#comissoes .categoria:nth-child(3) .funcionario:nth-child(2) .foto::after { content: 'KIRA'; }
+#comissoes .categoria:nth-child(3) .funcionario:nth-child(3) .foto { background: linear-gradient(45deg, #9370DB, #BA55D3); }
+#comissoes .categoria:nth-child(3) .funcionario:nth-child(3) .foto::after { content: 'MIKA'; }
+#comissoes .categoria:nth-child(3) .funcionario:nth-child(4) .foto { background: linear-gradient(45deg, #00CED1, #20B2AA); }
+#comissoes .categoria:nth-child(3) .funcionario:nth-child(4) .foto::after { content: 'YUKI'; }
+
+#comissoes .categoria:nth-child(5) .foto { background: linear-gradient(45deg, #28a745, #20c997); }
+#comissoes .categoria:nth-child(5) .foto::after { content: 'MAX'; }
+/* Continue para outros... */
+
+#comissoes .foto::after {
+    content: attr(data-nome);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    z-index: 2;
+}
+.foto {
+    width: 140px !important;
+    height: 140px !important;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    background-size: cover !important;
+    background-position: center !important;
+    border: 5px solid white;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* REMOVE QUALQUER TEXTO que aparece na foto */
+.foto::after,
+.foto::before {
+    content: none !important;
+}
+/* REMOVER BOLA/HOVER VERMELHO */
+#comissoes .funcionario:hover .foto::after,
+#comissoes .funcionario:hover .foto::before,
+.foto::after,
+.foto::before {
+    display: none !important;
+    content: none !important;
+}
+
+/* OU SIMPLIFIQUE o hover */
+#comissoes .funcionario:hover .foto {
+    transform: scale(1.05);  /* Só cresce - SEM vermelho */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+/* *** FORÇA AS FOTOS REAIS APARECIREM *** */
+#comissoes .foto {
+    background-image: none !important;
+}
+
+/* *** APLICAÇÃO DAS FOTOS (ajuste os caminhos) *** */
+#comissoes .funcionario:nth-of-type(1) .foto { background-image: url('fotos/luna.jpg') !important; }
+#comissoes .funcionario:nth-of-type(2) .foto { background-image: url('fotos/kira.jpg') !important; }
+#comissoes .funcionario:nth-of-type(3) .foto { background-image: url('fotos/mika.jpg') !important; }
+#comissoes .funcionario:nth-of-type(4) .foto { background-image: url('fotos/yuki.jpg') !important; }
+
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .grid-funcionarios {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+    }
+    
+    .foto {
+        width: 110px;
+        height: 110px;
+        font-size: 0.9rem;
+    }
+}
+
+/* CARDS PARCERIAS */
+.partners-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
-  justify-content: center;
+  margin-bottom: 2rem;
 }
-    /* ---- ABA DOAÇÕES ---- */
-    #doacoes {
-      text-align: center;
-      background: #ffffff0d;
-      border-radius: 16px;
-      padding: 2rem 1rem;
+
+.partner-card {
+  border: 2px solid #dc143c;
+  border-radius: 12px;
+  padding: 1.2rem;
+  text-align: center;
+  background: #fff;
+  transition: 0.3s;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.partner-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(220,20,60,0.3);
+}
+
+.partner-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 3px solid #dc143c;
+  margin: 0 auto 1rem;
+}
+
+.partner-name {
+  font-weight: bold;
+  color: #dc143c;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.partner-social {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* BOTÃO VERMELHO REDES SOCIAIS */
+.btn-social {
+  display: inline-block;
+  background: #dc143c;
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.95rem;
+  transition: 0.3s;
+  border: none;
+  width: 100%;
+}
+
+.btn-social:hover {
+  background: #ff0000;
+  transform: translateY(-2px);
+}
+
+/* SEÇÃO PIX SEPARADA */
+.pix-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.pix-card {
+  background: linear-gradient(135deg, #dc143c, #ff0000);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(220,20,60,0.4);
+}
+
+.pix-card h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.pix-copy {
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 1.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.pix-copy:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.02);
+}
+
+.pix-key {
+  font-family: monospace;
+  background: rgba(255,255,255,0.9);
+  color: #333;
+  padding: 0.8rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  letter-spacing: 1px;
+  user-select: all;
+}
+
+.copy-text {
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+/* BOTÃO COMPROVANTE */
+.btn-pix {
+  background: #fff;
+  color: #dc143c;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: 0.3s;
+  border: 2px solid #fff;
+  display: inline-block;
+}
+
+.btn-pix:hover {
+  background: #dc143c;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .partners-grid {
+    grid-template-columns: 1fr;
+  }
+  .pix-card {
+    margin: 0 1rem;
+    padding: 1.5rem;
+  }
+}
+
+    /* MODAL DE VÍDEO */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 1200;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
     }
-    #doacoes h3 {
-      margin-bottom: 1rem;
-      color: #d9befb;
-      font-size: 1.3rem;
+
+    .modal-content {
+      max-width: 800px;
+      width: 100%;
     }
-    
-    #doacoes .qr {
-      width: 180px;
-      height: 180px;
-      border-radius: 16px;
-      margin-bottom: 1.2rem;
-      border: 4px solid #b897fc;
-      background: #ffffff;
-      display: inline-block;
+
+    .modal-content video {
+      width: 100%;
+      max-height: 70vh;
+      border-radius: 8px;
     }
-    #doacoes .pix-box {
-      margin-bottom: 1.2rem;
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 0.8rem 1rem;
-      color: #555;
-      font-family: monospace;
-      font-size: 1.2rem;
-      letter-spacing: 1px;
+
+    .modal-close {
+      margin-top: 0.5rem;
+      text-align: right;
     }
-    #doacoes .copy-btn {
-      background: linear-gradient(to right, #3a1b6b, #1e1e40);
-      color: white;
+
+    .modal-close button {
       border: none;
-      border-radius: 24px;
-      padding: 0.6rem 1.2rem;
-      font-size: 0.9rem;
+      background: #dc143c;
+      color: #fff;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
       cursor: pointer;
     }
-    #doacoes .copy-btn:hover {
-      background: linear-gradient(to right, #5b2a87, #4a34b6);
+    
+
+    /* RESPONSIVO */
+    @media (max-width: 768px) {
+      .nav-tabs {
+        flex-direction: column;
+      }
+      .main-content {
+        margin-top: 260px;
+      }
+      .cart-float {
+        top: auto;
+        bottom: 1rem;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- HEADER -->
   <header>
-    <nav>
-  <ul>
-    <li><a href="#personagens">Personagens</a></li>
-    <li><a href="#parcerias">Parcerias</a></li>
-    <li><a href="#funcionarios">Funcionários</a></li>
-    <li><a href="#doacoes">Doações</a></li>
-    <li><a href="#sobre">Sobre</a></li> <!-- nova aba -->
-  </ul>
-</nav>
+    <div class="header-top">
+      <!-- SUBSTITUA POR SUA LOGO REAL -->
+      <img src="logo.jpeg" alt="Indústria PNGTuber">
+      <div class="slogan">Tudo para PNGTubers Profissionais</div>
+    </div>
 
-  <div class="container">
+    <nav class="nav-tabs">
+      <div class="nav-tab active" data-tab="sobre">📢 Sobre e Notícias</div>
+      <div class="nav-tab" data-tab="pngs">🖼️ PNGs Prontos</div>
+      <div class="nav-tab" data-tab="produtos">🛒 Venda</div>
+      <div class="nav-tab" data-tab="comissoes">✨ Comissões</div>
+      <div class="nav-tab" data-tab="parcerias">🤝 Parcerias</div>
+    </nav>
+  </header>
 
-    <!-- PERSONAGENS -->
-    <section id="personagens">
-      <h2>Personagens</h2>
-      <div class="cards">
-        <div class="card card-personagem">
-          <a href="#modal-ze">
-            <img src="zé.jpg" alt="Zé" />
-            <h3>Zé</h3>
-            <p>Fruta: Merlot</p>
-          </a>
+  <main class="main-content">
+    <!-- ABA 1: SOBRE E NOTÍCIAS -->
+    <section id="sobre" class="active">
+      <h1>Indústria PNGTuber</h1>
+      
+      <div class="card">
+        <h2>🎯 O que são PNGTubers?</h2>
+        <p>PNGTubers são imagens 2D usadas em streams que <strong>reagem à sua voz</strong> através da troca automática de expressões (idle, feliz, triste, bravo, etc.).</p>
+        <p style="margin-top: 0.8rem;">Criadas em ferramentas como <strong>Picrew</strong> e <strong>Charat.me</strong>, elas são perfeitas para streamers iniciantes e profissionais que querem identidade visual sem complicações!</p>
+      </div>
+
+      <div class="card">
+        <h2>📰 Notícias Recentes</h2>
+        <div class="news-grid">
+          <div class="news-item">
+            <h3>09/03/2026</h3>
+            <p><strong>15 novos PNGTubers lançados!</strong><br>Modelos exclusivos com até 12 expressões.</p>
+          </div>
+          <div class="news-item">
+            <h3>07/03/2026</h3>
+            <p><strong>Integração TikTok Live</strong><br>PNGTubers agora funcionam perfeitamente no TikTok!</p>
+          </div>
+          <div class="news-item">
+            <h3>05/03/2026</h3>
+            <p><strong>Picrew lança base oficial</strong><br>Nova base PNGTuber gratuita com 20+ expressões.</p>
+          </div>
         </div>
-        <div class="card card-personagem">
-          <a href="#modal-octavia">
-            <img src="Octavia.jpg" alt="Octavia" />
-            <h3>Octavia</h3>
-            <p>Fruta: Guaraná</p>
-          </a>
-        </div>
-        <div class="card card-personagem">
-          <a href="#modal-teo">
-            <img src="téo.jpg" alt="Téo" />
-            <h3>Téo</h3>
-            <p>Fruta: Goiaba</p>
-          </a>
-        </div>
-        <div class="card card-personagem">
-  <a href="#modal-lucky">
-    <img src="lucky.jpg" alt="Lucky" />
-    <h3>Lucky</h3>
-    <p>Fruta: Cacau</p>
-  </a>
-</div><div class="card card-personagem">
-  <a href="#modal-nana">
-    <img src="nana.jpg" alt="Nana" />
-    <h3>Nana</h3>
-    <p>Fruta: Tomate</p>
-  </a>
+      </div><div class="png-showcase">
+    <img src="sua-imagem.png" alt="PNGTuber" class="png-image">
+    <div class="png-card">
+         <h4>Notícia</h4>
+        <h3>PNGTuber Profissional</h3>
+        <p>8 expressões + PSD</p>
+    </div>
 </div>
-<div class="card card-personagem">
-  <a href="#modal-tango">
-    <img src="tango.jpg" alt="Tango" />
-    <h3>Tango</h3>
-    <p>Fruta: Pitanga</p>
-  </a>
+<div class="png-showcase" style="display: flex; gap: 3rem; align-items: flex-start; max-width: 1200px; margin: 4rem auto; padding: 0 1rem;">
+    
+    <!-- PNGTUBER - SÓ IMAGEM -->
+    <div style="flex: 1; text-align: center; padding-top: 1rem;">
+        <img src="seu-personagem.png" alt="PNGTuber" 
+             style="width: 320px; height: 320px; object-fit: contain; display: block; margin: 0 auto;">
+    </div>
+    
+   <!-- DISTÂNCIA 150px entre seções -->
+<div style="height: 150px;"></div>
+
+<!-- BIBLIOTECA VTUBER (mais embaixo) -->
+<div style="flex: 1.2; background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%); border: 2px solid #dc143c; padding: 2.5rem; border-radius: 30px; box-shadow: 0 30px 80px rgba(220,20,60,0.15); min-height: 380px; display: flex; flex-direction: column; position: relative; max-width: 800px; margin: 0 auto;">
+
+    <!-- Linha decorativa superior -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, #dc143c, transparent);"></div>
+    
+    <!-- Título principal -->
+    <div style="font-size: 2.5rem; margin-bottom: 1.5rem; color: #dc143c; font-weight: 800; letter-spacing: -0.02em;">
+        📚 Biblioteca VTuber
+    </div>
+    
+    <!-- Texto descritivo -->
+    <div style="flex: 1; font-size: 1.1rem; color: #444; line-height: 1.7; margin-bottom: 2rem;">
+        <strong>O maior projeto criado por uma única pessoa</strong> com o intuito de reunir VTubers de todo o mundo.
+        <br><br>
+        Um <strong>catálogo oficial de VTubers 2D, 3D e PNG</strong> — totalmente <strong>gratuito para todos!</strong>
+        <br><br>
+        Criado por <strong>Mih Estelar em 14 de novembro de 2025</strong>, o projeto atualmente conta com <strong>338 participantes</strong>, incluindo VTubers do Brasil, Portugal, Inglaterra, Austrália e Indonésia.
+        <br><br>
+        A criadora do projeto é <strong>autista e possui TDAH</strong>, mostrando que, com dedicação e paixão, é possível construir algo incrível e impactar toda uma comunidade.
+    </div>
+    
+    <!-- Botão CTA -->
+    <a href="https://mih-estelar.github.io/bibliotecavtuber/" target="_blank" 
+       style="background: linear-gradient(135deg, #dc143c, #c82333); color: white; padding: 1.2rem 3rem; border-radius: 35px; text-decoration: none; font-weight: 700; font-size: 1.15rem; box-shadow: 0 12px 35px rgba(220,20,60,0.4); transition: all 0.3s; text-align: center; letter-spacing: 0.5px; display: inline-block;">
+        🚀 Acessar Biblioteca VTuber
+    </a>
 </div>
+
+ </a>
+        </div>
+    </div>
+</div>
+    
+<!-- DISTÂNCIA 200px -->
+<div style="height: 200px;"></div>
+
+<div style="max-width: 1000px; margin: 0 auto 4rem auto; padding: 0 1rem; text-align: center;">
+
+    <!-- PNG ANTES DO QUADRO (z-index 2) -->
+    <div style="position: relative; margin-bottom: 1rem; z-index: 2;">
+        <img src="artista-digital.png" alt="Artista Digital" 
+             style="width: 420px; height: 420px; object-fit: contain; border-radius: 25px; display: block; margin: 0 auto;">
+    </div>
+
+    <!-- QUADRO com texto MAIS PRA FORA (padding menor) -->
+    <div style="background: #ffffff; border: 5px solid #dc143c; border-radius: 25px; 
+                padding: 3rem 2rem 3rem; box-shadow: 0 30px 80px rgba(220,20,60,0.25); 
+                position: relative; z-index: 1; display: inline-block; max-width: 700px; margin-top: -100px;">
+        
+        <h2 style="font-size: 2.7rem; font-weight: 900; margin-bottom: 1.5rem; color: #dc143c;">
+            Arte Digital & Encomendas
+        </h2>
+        
+        <!-- TEXTO COMPLETO -->
+        <div style="color: #333; font-size: 1.15rem; line-height: 1.75; text-align: left;">
+            <p style="margin-bottom: 1.5rem;">
+                Olá! Sou artista digital e crio minhas ilustrações diretamente pelo celular, utilizando a técnica de desenho com o dedo. Meu trabalho é focado em criatividade, dedicação e respeito às diretrizes de conteúdo seguro (SFW).
+            </p>
+            
+            <div style="background: #f8f9fa; padding: 1.8rem; border-radius: 18px; border-left: 6px solid #dc143c; margin: 1.5rem 0;">
+                <h3 style="font-size: 1.6rem; margin-bottom: 1rem; color: #dc143c;">✨ O que eu faço:</h3>
+                <ul style="margin: 0; padding-left: 1.8rem; font-size: 1.12rem;">
+                    <li>OCs (Original Characters): Trago seus personagens originais à vida com designs detalhados.</li>
+                    <li>Ships: Desenho casais e interações entre personagens que você ama.</li>
+                    <li>Estilos Variados: Especialista em capturar estéticas marcantes, desde o casual até o punk ou tradicional</li>
+                </ul>
+            </div>
+            
+            <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
+                Não realizo artes de conteúdo adulto (+18) ou temas inadequados.
+            </p>
+            
+            <div style="background: #f0f8ff; padding: 1.8rem; border-radius: 18px; border-left: 6px solid #dc143c; margin: 1.5rem 0;">
+                <h3 style="font-size: 1.6rem; margin-bottom: 1rem; color: #dc143c;">Como funciona o processo:</h3>
+                <ul style="margin: 0; padding-left: 1.8rem; font-size: 1.12rem;">
+                    <li>Esboço: Após o pedido, envio o rascunho para sua aprovação antes de seguir para a finalização</li>
+                    <li>Pagamento: Você pode optar por Pagamento total no início. 50% no início (sinal) e os 50% restantes após a entrega da arte final.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- BOTÃO TIKTOK -->
+        <div style="margin-top: 2rem;">
+            <a href="https://www.tiktok.com/@alexya.origuela?_r=1&_t=ZS-956Cn5lMEWu" target="_blank" 
+               style="background: linear-gradient(45deg, #dc143c, #ff6b9d); color: white; padding: 1.4rem 3.5rem; border-radius: 40px; 
+                      font-weight: 900; font-size: 1.2rem; box-shadow: 0 18px 50px rgba(220,20,60,0.45); 
+                      text-decoration: none; display: inline-flex; align-items: center; gap: 0.7rem;">
+                📱 Seguir no TikTok
+            </a>
+        </div>
+    </div>
+</div>
+    </section>
+
+    <!-- ABA 2: PNGs PRONTOS -->
+    <section id="pngs">
+      <h1>Galeria PNGTubers Prontos</h1>
+      <p style="text-align:center;margin-bottom:1.5rem;font-size:1.1rem;">Clique na ▶ para ver todas as expressões em vídeo!</p>
+
+      <div class="png-grid">
+        <div class="png-card" onclick="openVideo('video1')">
+          <div class="png-thumb-wrapper">
+            <img src="video1.png" alt="Akira">
+            <div class="play-icon">▶</div>
+          </div>
+          <div class="png-info">Puck<br><small>8 expressões</small></div>
+        </div>
+
+        <div class="png-card" onclick="openVideo('video2')">
+          <div class="png-thumb-wrapper">
+            <img src="https://via.placeholder.com/300x180/ff1744/fff?text=Luna+Foxy" alt="Luna">
+            <div class="play-icon">▶</div>
+          </div>
+          <div class="png-info">Luna Foxy<br><small>10 expressões</small></div>
+        </div>
+    </section>
+
+    <!-- ABA 3: PRODUTOS -->
+    <section id="produtos">
+      <h1>Nossos Produtos</h1>
+
+<div class="products-grid">
+    <!-- 1. Capas de Vídeo -->
+    <div class="product-card">
+        <div class="product-img">🎥</div>
+        <div class="product-body">
+            <h2>Capas de Vídeo</h2>
+            <p>Capas profissionais para YouTube, Twitch e TikTok com seu PNGTuber.</p>
+            <div class="price">R$ 97,00</div>
+            <button class="btn" onclick="addToCart('Capas de Vídeo', 97)">➕ Carrinho</button>
+        </div>
+    </div>
+
+    <!-- 2. Edição de Vídeo -->
+    <div class="product-card">
+        <div class="product-img">✂️</div>
+        <div class="product-body">
+            <h2>Edição de Vídeo</h2>
+            <p>Edição completa com transições e sincronia perfeita do PNGTuber.</p>
+            <div class="price">R$ 197,00</div>
+            <button class="btn" onclick="addToCart('Edição de Vídeo', 197)">➕ Carrinho</button>
+        </div>
+    </div>
+
+    <!-- 3. PNGTuber Personalizado -->
+    <div class="product-card">
+        <div class="product-img">🖼️</div>
+        <div class="product-body">
+            <h2>PNGTuber Personalizado</h2>
+            <p>PNG exclusivo com 8+ expressões feitas especialmente para você.</p>
+            <div class="price">R$ 497,00</div>
+            <button class="btn" onclick="addToCart('PNGTuber Personalizado', 497)">➕ Carrinho</button>
+        </div>
+    </div>
+
+    <!-- 4. Vtuber -->
+    <div class="product-card">
+        <div class="product-img">🖼️</div>
+        <div class="product-body">
+            <h2>Vtuber</h2>
+            <p>Modelo Vtuber completo e personalizado.</p>
+            <div class="price">R$ 100,00</div>
+            <button class="btn" onclick="addToCart('Modelo Vtuber', 100)">➕ Carrinho</button>
+        </div>
+    </div>
+
+    <!-- 5. Animação -->
+    <div class="product-card">
+        <div class="product-img">🎥</div>
+        <div class="product-body">
+            <h2>Animação</h2>
+            <p>Animação por minuto de alta qualidade.</p>
+            <div class="price">R$ 100,00</div>
+            <button class="btn" onclick="addToCart('Animação por minuto', 100)">➕ Carrinho</button>
+        </div>
+    </div>
+</div>
+
+
       </div>
     </section>
 
-    <section id="parcerias">
-  <h2>Parcerias</h2>
-  <p>
-    Aceitamos parcerias com projetos independentes. O valor é de R$30.<br />
-    Caso a pessoa não possa pagar no momento, podemos fazer um acordo temporário até que consiga pagar.<br />
-    Esse valor será dividido entre os três membros do grupo, ajudando todos a continuarem trabalhando, já que alguns não possuem emprego no momento.
-  </p>
-  <div class="cards">
-    <div class="card">
-      <img src="Turma do traço torto.png" alt="Turma do traço torto" />
-      <h3> C/A/E animations </h3>
-      <p>Pequeno projeto de Chester_art onde Mih dubla Agatha</p>
-      <a href="https://www.tiktok.com/@chester_arte" class="btn">TikTok</a>
+    <!-- ABA 4: COMISSÕES -->
+    <section id="comissoes">
+      <h1>Área de Comissões</h1>
+      <p style="text-align:center;margin-bottom:2rem;font-size:1.1rem;">
+        Artistas e criadores: <strong>ganhe dinheiro</strong> trabalhando conosco!
+      </p>
+
+      <div class="card form-box">
+        <h2>🚀 Envie sua Proposta</h2>
+        <form onsubmit="submitCommission(event)">
+          <div class="form-group">
+            <label>👤 Nome Completo</label>
+            <input type="text" id="nomeComissao" required>
+          </div>
+
+          <div class="form-group">
+            <label>🎨 Portfólio (link)</label>
+            <input type="url" id="portfolioComissao" placeholder="https://seu-portfolio.com" required>
+          </div>
+
+          <div class="form-group">
+            <label>🛠️ Tipo de Serviço</label>
+            <select id="servicoComissao" required>
+              <option value="">Selecione...</option>
+              <option>Edição PNG</option>
+              <option>Animação Live2D</option>
+              <option>Arte Digital</option>
+              <option>Edição de Vídeo</option>
+              <option>Roteirização</option>
+              <option>Dublador</option>
+              <option>Sites</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>📱 Contato (WhatsApp)</label>
+            <input type="tel" id="contatoComissao" placeholder="(43) 99999-9999" required>
+          </div>
+
+          <button class="btn" type="submit">📲 Enviar Proposta no WhatsApp</button>
+        </form>
+
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th>Serviço</th>
+              <th>Faixa de Preço</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PNGTuber Básico</td>
+              <td>R$ 50 - R$ 150</td>
+            </tr>
+            <tr>
+              <td>PNGTuber Premium</td>
+              <td>R$ 200 - R$ 500</td>
+            </tr>
+                        <tr>
+              <td>PNG tube animado Com 4 expressão</td>
+              <td>R$ 120</td>
+            </tr>
+            <tr>
+              <td>Edição Vídeo</td>
+              <td>R$ 100 - R$ 300</td>
+            </tr>
+              <tr>
+              <td>Criador de site</td>
+              <td>R$ 300 - R$ 500</td>
+               <tr>
+               </tr>
+             <td>Dublador Novato</td>
+              <td>R$ 50/min</td>
+            </tr>
+            <tr>
+              <td>Dublador Mediano</td>
+              <td>R$ 70/min</td>
+            </tr>
+            <tr>
+              <td>Dublador Profissiona</td>
+              <td>R$ 120 </td>
+            </tr>
+          </tbody>
+        </table>
+ 
+        <p style="margin-top:1rem;text-align:center;color:#dc143c;font-weight:bold;">
+          💎 <strong>Benefícios:</strong> Pagamento rápido, clientes recorrentes e destaque na plataforma!
+        </p>
+      </div>
+      <!-- COLE DENTRO de <section id="comissoes"> -->
+<div class="funcionarios-comissoes">
+    <div class="bg-vermelho"></div>
+    
+    <h2 class="titulo-funcionarios">FUNCIONÁRIOS</h2>
+    
+   <!-- ARTISTAS -->
+   <div class="categoria">
+    <h3>ARTISTAS</h3>
+<div class="grid-funcionarios">
+    <div class="funcionario" onclick="window.open('https://invikjhub.carrd.co')">
+        <div class="foto" style="background-image: url('Johnxs.jpeg') !important;"></div>
+        <p>@Johnxs</p>
     </div>
-    <div class="card">
-      <img src="parceria-b.jpg" alt="Projeto B" />
-      <h3>Projeto B</h3>
-      <p>Comunidade de streams curtas</p>
-      <a href="https://tiktok.com/@exemplo" class="btn">TikTok</a>
+    <div class="funcionario" onclick="window.open('https://www.behance.net/samuelanimao')">
+        <div class="foto" style="background-image: url('Soma.jpeg') !important;"></div>
+        <p>@Soma</p>
+    </div>
+    <div class="funcionario" onclick="window.open('https://www.instagram.com/eu_drawliet/')">
+        <div class="foto" style="background-image: url('eu_drawliet.jpg') !important;"></div>
+        <p>@eu_drawliet</p>
+    </div>
+    <div class="funcionario" onclick="window.open('https://tiktok.com/@yuki_draw','_blank')">
+        <div class="foto" style="background-image: url('yuki_draw.jpg') !important;"></div>
+        <p>@yuki_draw</p>
+    </div>
+</div>
+
+<!-- EDITORES -->
+<div class="categoria">
+    <h3>EDITORES</h3>
+    <div class="grid-funcionarios">
+      <div class="funcionario" onclick="window.open('https://www.behance.net/samuelanimao')">
+        <div class="foto" style="background-image: url('Soma.jpeg') !important;"></div>
+        <p>@Soma</p>
+        </div>
+        <div class="funcionario" onclick="window.open('https://www.instagram.com/uma.pessoa.qalquer?igsh=MTluNWVxa2F6Nzdwbw==','_blank')">
+            <div class="foto" style="background-image: url('Doder.jpeg') !important;"></div>
+            <p>@Doder</p>
+        </div>
+        <div class="funcionario" onclick="window.open('https://twitch.tv/vid_ace','_blank')">
+            <div class="foto" style="background-image: url('vid_ace.jpg') !important;"></div>
+            <p>@vid_ace</p>
+        </div>
+        <div class="funcionario" onclick="window.open('https://twitch.tv/cut_pro','_blank')">
+            <div class="foto" style="background-image: url('cut_pro.jpg') !important;"></div>
+            <p>@cut_pro</p>
+        </div>
+    </div>
+</div>
+<!-- EDITORES -->
+<div class="categoria">
+    <h3>DUBLALDOR</h3>
+    <div class="grid-funcionarios">
+      <div class="funcionario" onclick="window.open('https://www.tiktok.com/@davivkoficial?_r=1&_t=ZS-959Y4H8rTeu')">
+        <div class="foto" style="background-image: url('Vocalista de Konoha.jpeg') !important;"></div>
+        <p>@Vocalista de Konoha</p>
+        </div>
+         </div>
+    </div>
+</div>
+<!-- PROGRAMADORES -->
+<div class="categoria">
+    <h3>PROGRAMADOR</h3>
+    <div class="grid-funcionarios">
+        <div class="funcionario" onclick="window.open('https://tiktok.com/@mih_estelar','_blank')">
+            <div class="foto" style="background-image: url('mih-estelar.png') !important;"></div>
+            <p>@MIH_Estelar</p>
+        </div>
+    </div>
+</div>
+
+       
+    </div>
+</div>
+
+    </section>
+  </main>
+  
+
+  <!-- CARRINHO FLUTUANTE -->
+  <div class="cart-float" onclick="finishWhatsApp()">
+    <span>🛒</span>
+    <span id="cartCount">0</span>
+    <span id="cartTotal">R$ 0,00</span>
+  </div>
+
+  <!-- MODAL VÍDEO -->
+  <div id="videoModal" class="modal-overlay">
+    <div class="modal-content">
+      <video id="modalVideo" controls></video>
+      <div class="modal-close">
+        <button onclick="closeVideo()">❌ Fechar</button>
+      </div>
     </div>
   </div>
-</section>
-<!-- FUNCIONÁRIOS (mesmo estilo de card do personagem) -->
-<section id="funcionarios">
-  <h2>Funcionários dubladores</h2>
-  <div class="cards">
-    <div class="card">
-      <img src="mih.jpg" alt="Mih" />
-      <h3>Mih</h3>
-      <a href="https://www.tiktok.com/@mih_studio_br" class="btn">TikTok</a>
+<section id="parcerias">
+  <!-- TÍTULO -->
+  <h1 style="color: #dc143c; text-align: center; margin-bottom: 2rem;">🤝 Nossos Parceiros</h1>
+
+  <!-- CARDS COM BOTÃO VERMELHO -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; padding: 0 1rem;">
+    
+    <!-- CARD 1 -->
+    <div style="border: 2px solid #dc143c; border-radius: 12px; padding: 1.2rem; text-align: center; background: #fff; transition: transform 0.3s; height: 320px; display: flex; flex-direction: column; justify-content: space-between;">
+      <img src="https://via.placeholder.com/100x100/dc143c/fff?text=PNG" alt="PNG Tuber" style="width: 100px; height: 100px; border-radius: 8px; object-fit: cover; border: 3px solid #dc143c; margin: 0 auto 1rem;">
+      <div style="font-weight: bold; color: #dc143c; font-size: 1.1rem; margin-bottom: 0.5rem;">Biblioteca vtuber</div>
+      <div style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;"></div>
+      <a href="https://mih-estelar.github.io/bibliotecavtuber/" target="_blank" 
+         style="background: #dc143c; color: white; padding: 0.8rem 1.2rem; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 0.95rem; transition: background 0.3s; display: block;">
+        📸 Site
+      </a>
     </div>
-    <div class="card">
-      <img src="V.R Papel.jpg" alt="V.R Papel" />
-      <h3>V.R Papel</h3>
-      <a href="https://www.instagram.com/v.rpapel/" class="btn">Instagram</a>
+
+<!-- CARD 3 -->
+    <div style="border: 2px solid #dc143c; border-radius: 12px; padding: 1.2rem; text-align: center; background: #fff; transition: transform 0.3s; height: 320px; display: flex; flex-direction: column; justify-content: space-between;">
+      <img src="CloverST.jpeg" alt="PNG Tuber" style="width: 100px; height: 100px; border-radius: 8px; object-fit: cover; border: 3px solid #dc143c; margin: 0 auto 1rem;">
+      <div style="font-weight: bold; color: #dc143c; font-size: 1.1rem; margin-bottom: 0.5rem;">CloverST</div>
+      <div style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">@CloverST-udios</div>
+      <a href="https://youtube.com/@cloverst-udios?si=jY5e7MK2rH31myPG" target="_blank" 
+         style="background: #dc143c; color: white; padding: 0.8rem 1.2rem; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 0.95rem; transition: background 0.3s; display: block;">
+        📸 YOUTUBE
+      </a>
     </div>
-    <div class="card">
-      <img src="yuki.jpg" alt="Yuki" />
-      <h3>Yuki</h3>
-      <a href="https://www.tiktok.com/@yuki_artesl" class="btn">TikTok</a>
-    </div>
-    <div class="card">
-      <img src="sasu.jpg" alt="Sasu" />
-      <h3>Sasu</h3>
-      <a href="https://www.tiktok.com/@sasuumiuu" class="btn">TikTok</a>
-    </div>
-    <div class="card">
-      <img src="oYeager.jpg" alt="PU_PUCK🐉🐲" />
-      <h3>PU_PUCK🐉🐲</h3>
-      <a href="https://www.tiktok.com/@puki_ow" class="btn">Tiktok</a>
+
+      </a>
     </div>
   </div>
 
-  <h2>Funcionários artistas</h2>
-<div class="cards">
-  <div class="card">
-    <img src="Zeze.jpg" alt="Zeze" style="width: 120px; height: 120px; object-fit: cover; border-radius: 0; border: 4px solid #b897fc; margin-bottom: 0.8rem;" />
-    <h3>Zeze</h3>
-    <a href="https://www.tiktok.com/@zezeguima.ttv" class="btn">TikTok</a>
+   <!-- SEÇÃO PIX DELICADA -->
+  <div style="display: flex; justify-content: center; padding: 0 1rem 2rem 1rem;">
+    <div style="background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,248,248,0.9)); backdrop-filter: blur(15px); border: 1px solid rgba(220,20,60,0.15); border-radius: 24px; padding: 2.5rem 2rem; text-align: center; max-width: 420px; width: 100%; box-shadow: 0 20px 50px rgba(220,20,60,0.08); position: relative; border-radius: 24px;">
+      
+      <!-- Decoração superior -->
+      <div style="position: absolute; top: -2px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: linear-gradient(90deg, #dc143c, rgba(220,20,60,0.5)); border-radius: 2px;"></div>
+      
+      <!-- Conteúdo -->
+      <div style="font-size: 2.4rem; margin-bottom: 1rem; display: block;">💰</div>
+      <h3 style="color: #dc143c; font-size: 1.35rem; font-weight: 600; margin-bottom: 0.8rem; letter-spacing: 0.5px;">Parceria Oficial</h3>
+      <div style="font-size: 2rem; font-weight: 800; color: #dc143c; margin-bottom: 2rem; text-shadow: 0 2px 8px rgba(220,20,60,0.15);">R$ 30,00</div>
+      
+      <!-- Chave PIX -->
+      <div style="background: rgba(220,20,60,0.04); border: 2px dashed rgba(220,20,60,0.2); border-radius: 20px; padding: 1.8rem 1.5rem; cursor: pointer; margin-bottom: 2.2rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);" onclick="copyPix()" onmouseover="this.style.background='rgba(220,20,60,0.08)'; this.style.borderStyle='solid';" onmouseout="this.style.background='rgba(220,20,60,0.04)'; this.style.borderStyle='dashed';">
+        <div style="font-size: 1.1rem; color: #dc143c; margin-bottom: 1rem; font-weight: 500; letter-spacing: 0.3px;">CHAVE PIX:</div>
+        <div id="pixKey" style="font-family: 'Courier New', monospace; background: linear-gradient(135deg, #fff, #f9f9f9); color: #333; padding: 1.2rem 1.5rem; border-radius: 14px; font-size: 1.15rem; letter-spacing: 2px; border: 1px solid rgba(220,20,60,0.2); box-shadow: 0 6px 20px rgba(0,0,0,0.1); user-select: all; margin-bottom: 0.8rem;">11 96596-4700</div>
+        <div id="copyText" style="font-size: 0.88rem; color: #dc143c; font-weight: 500; letter-spacing: 0.4px;">👆 Clique para COPIAR</div>
+      </div>
+      
+      <!-- Botão comprovante -->
+      <a href="https://www.instagram.com/png_tuber_oficial?igsh=MW4xc21sZnAzNjYzYg==" target="_blank" 
+         style="background: linear-gradient(135deg, #dc143c, #c82333); color: #fff; padding: 1.2rem 2.8rem; border-radius: 32px; text-decoration: none; font-weight: 700; font-size: 1.05rem; box-shadow: 0 8px 25px rgba(220,20,60,0.35); display: inline-block; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: none; letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.95rem;">
+        📩 Enviar comprovante
+      </a>
+    </div>
   </div>
-</div>
 </section>
-   <!-- DOAÇÕES -->
-<section id="doacoes">
-  <h2>Doações</h2>
-  <img src="qrcode.jpg" alt="QR Code Pix" style="width: 160px; height: 160px; border-radius: 12px; border: 4px solid #b897fc;" />
-  <h3 id="pix-text">Pix: 08350550945</h3>
-  <button class="copy-btn" onclick="copyPix()">Copiar Pix</button>
-</section><script>
-  function copyPix() {
-    const pixText = document.getElementById("pix-text").textContent.replace("Pix: ", "");
-    navigator.clipboard
-      .writeText(pixText)
-      .then(() => {
-        alert("Número Pix copiado!");
-      })
-      .catch(err => {
-        alert("Erro ao copiar: " + err);
+  <script>
+    // Navegação entre abas
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
       });
-  }
-</script>
-</section>
-<!-- SOBRE (foto grande do grupo) -->
-<section id="sobre">
-  <div style="text-align: center; margin-bottom: 1.5rem;">
-    <img src="grupo.jpg" alt="Mundo do Zé" style="max-width: 100%; max-height: 400px; border-radius: 12px; border: 4px solid #b897fc; margin-bottom: 1rem;" />
-  </div>
+    });
 
-  <div style="max-width: 800px; margin: 0 auto; padding: 0 1rem; text-align: center; color: #e0d4ff; line-height: 1.7;">
-    <h2>Sobre o projeto — Mundo do Zé</h2>
-    <p>
-      O Mundo do Zé é um grupo de personagens criado para o canal da Zé Merlot.
-      O projeto surgiu de forma espontânea e descontraída, com foco em humor, improvisação e entretenimento.
-    </p>
+    // Vídeos (substitua pelas URLs reais)
+    const videoSources = {
+      video1: 'video12.mp4',
+      video2: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
+      video3: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
+      video4: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4'
+    };
 
-    <h3>Quem nós não somos</h3>
-    <p>
-      Não somos um projeto criado por terceiros com o objetivo de construir um universo complexo,
-      uma cidade fictícia ou um sistema oficial de poderes. <br/>
-      Também não contamos com roteiristas, animadores profissionais ou orçamento para contratar equipe,
-      designers ou outros colaboradores. O projeto é desenvolvido de forma independente pelos próprios integrantes.
-    </p>
+    function openVideo(id) {
+      const modal = document.getElementById('videoModal');
+      const video = document.getElementById('modalVideo');
+      video.src = videoSources[id];
+      modal.style.display = 'flex';
+      video.play();
+    }
 
-    <h3>Quem nós somos</h3>
-    <p>
-      Somos um grupo formado por <strong>6 personagens originais</strong>, criados pelos próprios dubladores. <br/>
-      Cada personagem foi desenvolvido por quem o interpreta, trazendo ideias, personalidades e características próprias.
-      Não seguimos um modelo fechado ou uma história oficial obrigatória. <br/>
-      Os ícones dos seis personagens foram feitos pelo Zezé como uma contribuição ao projeto.
-    </p>
+    function closeVideo() {
+      const modal = document.getElementById('videoModal');
+      const video = document.getElementById('modalVideo');
+      video.pause();
+      video.currentTime = 0;
+      modal.style.display = 'none';
+    }
 
-    <h3>Como ajudar o projeto</h3>
-    <p>
-      Se você tem interesse em ajudar o Mundo do Zé, é só entrar em contato com a gente. <br/>
-      No momento, os próprios membros do projeto criam as capas dos vídeos e fazem a edição do conteúdo publicado no YouTube.
-      Como somos um projeto independente, toda ajuda é bem-vinda. <br/>
-      Também queremos agradecer ao <strong>Chester_desenhista</strong>, que está produzindo o banner oficial do projeto.
-    </p>
+    // Carrinho de compras
+    let cart = [];
+    function addToCart(name, price) {
+      cart.push({name, price});
+      updateCartDisplay();
+      // Notificação visual
+      const notif = document.createElement('div');
+      notif.style.cssText = 'position:fixed;top:20px;right:20px;background:#dc143c;color:white;padding:1rem;border-radius:10px;z-index:2000';
+      notif.textContent = `${name} adicionado!`;
+      document.body.appendChild(notif);
+      setTimeout(() => notif.remove(), 3000);
+    }
 
-    <h3>Perguntas frequentes</h3>
-    <p>
-      <strong>Vocês pretendem adicionar mais dubladores?</strong> <br/>
-      Atualmente não temos planos para aumentar o elenco fixo de personagens. <br/>
-      Os personagens existentes já possuem seus respectivos criadores e dubladores.
-      Mesmo assim, temos interesse em trazer convidados para participar de vídeos, colaborações e aparições especiais quando houver oportunidade.
-    </p>
+    function updateCartDisplay() {
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      document.getElementById('cartCount').textContent = cart.length;
+      document.getElementById('cartTotal').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+    }
 
-    <p>
-      <strong>Existe uma lore oficial?</strong> <br/>
-      Não. O foco principal do Mundo do Zé é a criação de conteúdo divertido para o canal.
-      Algumas histórias, piadas ou acontecimentos podem se repetir entre vídeos, mas não existe uma lore oficial que todos os conteúdos precisem seguir.
-    </p>
-  </div>
+    function finishWhatsApp() {
+      if (cart.length === 0) {
+        alert('Carrinho vazio!');
+        return;
+      }
+      const itemsList = cart.map(item => `${item.name} - R$ ${item.price}`).join('\n');
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      const message = `🛒 *PEDIDO INDÚSTRIA PNGTUBER* 🛒%0A%0A${itemsList}%0A%0A💰 *Total: R$ ${total.toFixed(2)}*%0A%0AEntrego quando?`;
+      window.open(`https://wa.me/5511965964700?text=${encodeURIComponent(message)}`, '_blank');
+    }
+function copyPix() {
+  const pixKey = document.getElementById('pixKey');
+  navigator.clipboard.writeText(pixKey.textContent).then(() => {
+    const copyHint = document.querySelector('.copy-hint');
+    copyHint.textContent = '✅ Copiado!';
+    copyHint.style.color = '#10b981';
+    setTimeout(() => {
+      copyHint.textContent = '✨ Toque para copiar';
+      copyHint.style.color = '#dc143c';
+    }, 2000);
+  });
+}
 
-</section>
-   <!-- MODAL ZÉ (foto quadrada) -->
-<div class="modal" id="modal-ze">
-  <a href="#" class="modal-close">X</a>
-  <div class="modal-box">
-    <div class="modal-content">
-      <img src="zècorpo.jpg" alt="Zé" />
-      <h3>Zé</h3>
-      <p><strong>Idade:</strong> 18 anos</p>
-      <p><strong>Fruta que representa:</strong> Merlot</p>
-      <p><strong>Dubladora:</strong> <a href="https://www.tiktok.com/@mih_studio_br" class="link">Mih Estelar</a></p>
-      <p><strong>Artista (modelo):</strong> <a href="https://www.tiktok.com/@mih_studio_br" class="link">Mih Estelar</a></p>
-      <p><strong>Artista (ícone):</strong> <a href="https://www.tiktok.com/@zezeguima.ttv" class="link">Zeze</a></p>
+    // FORMULÁRIO COMISSÕES - ENVIA DIRETO WHATSAPP
+    function submitCommission(event) {
+      event.preventDefault();
+      
+      const nome = document.getElementById('nomeComissao').value;
+      const portfolio = document.getElementById('portfolioComissao').value;
+      const servico = document.getElementById('servicoComissao').value;
+      const contato = document.getElementById('contatoComissao').value;
 
-      <h4>Extras</h4>
-      <p><strong>Sexualidade:</strong> assexual</p>
-      <p><strong>Pronomes:</strong> ele/dele</p>
-      <p><strong>Personalidade:</strong> extrovertido, desenhista, autista/TDAH</p>
+      const message = 
+        `✨ *PROPOSTA DE COMISSÃO* ✨%0A%0A` +
+        `👤 *Nome:* ${nome}%0A` +
+        `🎨 *Portfólio:* ${portfolio}%0A` +
+        `🛠️ *Serviço:* ${servico}%0A` +
+        `📱 *Contato:* ${contato}%0A%0A` +
+        `📩 Enviado pelo site Indústria PNGTuber%0A%0A` +
+        `Quais são os próximos passos?`;
 
-      <p>
-        Personagem criado para ajudar no humor da criadora, que tem dificuldade na comunicação.  
-        A personalidade forte do Zé permite que a criadora se expresse melhor.
-      </p>
-
-      <p>
-        <strong>Poderes:</strong> Zé tem poderes de criar estrelas.
-      </p>
-    </div>
-  </div>
-</div>
-</section>
-   <!-- MODAL OCTAVIA -->
-<div class="modal" id="modal-octavia">
-  <a href="#" class="modal-close">X</a>
-  <div class="modal-box">
-    <div class="modal-content">
-      <img src="Octaviacorpo.jpg" alt="Octavia" />
-      <h3>Octavia</h3>
-      <p><strong>Idade:</strong> 15 anos</p>
-      <p><strong>Fruta que representa:</strong> Guaraná</p>
-      <p><strong>Dublador:</strong> <a href="https://www.instagram.com/v.rpapel/" class="link">V.R Papel</a></p>
-      <p><strong>Artista (modelo):</strong> <a href="https://www.tiktok.com/@mih_studio_br" class="link">Mih Estelar</a></p>
-      <p><strong>Artista (ícone):</strong> <a href="https://www.tiktok.com/@zezeguima.ttv" class="link">Zeze</a></p>
-
-      <h4>Extras</h4>
-      <p><strong>Sexualidade:</strong> fluído não neutro / bi</p>
-      <p><strong>Pronomes:</strong> tanto faz: ele/dele ou ela/dela não faz diferença pra mim</p>
-      <p><strong>Personalidade:</strong> tranquilo, antissocial</p>
-
-
-      <p>
-        <strong>Poderes:</strong> dimensão de bolso, capaz de guardar qualquer coisa sem limites de tamanho ou peso.
-      </p>
-
-      <p>
-        <strong>Habilidade secundária:</strong> reflexo super rápido, mais rápido que balas.  
-        A habilidade é completamente inspirada no guaraná, pois ele parece um olho.
-      </p>
-    </div>
-  </div>
-</div>
-
-   <!-- MODAL TÉO -->
-<div class="modal" id="modal-teo">
-  <a href="#" class="modal-close">X</a>
-  <div class="modal-box">
-    <div class="modal-content">
-      <img src="Téocorpo.jpg" alt="Téo" />
-      <h3>Téo</h3>
-      <p><strong>Idade:</strong> 21 anos</p>
-      <p><strong>Fruta que representa:</strong> Goiaba</p>
-      <p><strong>Dublador:</strong> <a href="https://www.tiktok.com/@yuki_artesl" class="link">Yuki</a></p>
-      <p><strong>Artista (modelo):</strong> <a href="https://www.tiktok.com/@mih_studio_br" class="link">Mih Estelar</a></p>
-      <p><strong>Artista (ícone):</strong> <a href="https://www.tiktok.com/@zezeguima.ttv" class="link">Zeze</a></p>
-
-      <h4>Extras</h4>
-      <p><strong>Sexualidade:</strong> assexual</p>
-      <p><strong>Personalidade:</strong> alegre, motivado, extrovertido, com fobia social, desenhista e dublador</p>
-
-      <p>
-        Um personagem que mostra a alegria, mesmo na dificuldade.
-      </p>
-
-      <p>
-        <strong>Poderes:</strong> Téo tem o poder de criação de objetos.
-      </p>
-    </div>
-  </div>
-</div>
-<!-- MODAL LUCKY -->
-<div class="modal" id="modal-lucky">
-  <a href="#" class="modal-close">X</a>
-  <div class="modal-box">
-    <div class="modal-content">
-      <img src="Luckycorpo.jpg" alt="Lucky" />
-      <h3>Lucky</h3>
-      <p><strong>Idade:</strong> 19 anos</p>
-      <p><strong>Fruta que representa:</strong> Cacau</p>
-      <p><strong>Dublador:</strong> <a href="https://www.tiktok.com/@puki_ow" class="link">pu_puck</a></p>
-      <p><strong>Artista (modelo):</strong> <a href="https://www.tiktok.com/@mih_studio_br" class="link">Mih Estelar</a></p>
-      <p><strong>Artista (ícone):</strong> <a href="https://www.tiktok.com/@zezeguima.ttv" class="link">Zeze</a></p>
-
-      <h4>Extras</h4>
-      <p><strong>Sexualidade:</strong> hetero</p>
-      <p><strong>Pronomes:</strong> luc/luk</p>
-
-      <p>
-        <strong>Personalidade:</strong> bastante fechado com conversas, apesar de ser antissocial não é de falar tanto.
-        Apesar de não ser muito grosseiro, com cada pessoa tem um jeito carinhoso, mas ao mesmo tempo um pouco arrogante e tímido.
-      </p>
-
-      <p>
-        <strong>Aparência:</strong> alto, cabelo curto, olhar um pouco cansado e com sono.
-      </p>
-
-      <p>
-        <strong>Poderes:</strong> capacidade de repelir e devolver ataques, dependendo da potência, quando está em modo ofensivo.
-      </p>
-    </div>
-  </div>
-</div>
-<!-- MODAL NANA -->
-<div class="modal" id="modal-nana">
-  <a href="#" class="modal-close">X</a>
-  <div class="modal-box">
-    <div class="modal-content">
-      <img src="nanacorpo.jpg" alt="Nana" />
-      <h3>Nana</h3>
-      <p><strong>Idade:</strong> 18 anos</p>
-      <p><strong>Fruta que representa:</strong> Tomate</p>
-      <p><strong>Dubladora:</strong> <a href="https://www.tiktok.com/@sasuumiuu" class="link">Susu</a></p>
-      <p><strong>Artista (modelo):</strong> <a href="https://www.tiktok.com/@mih_studio_br" class="link">Mih Estelar</a></p>
-      <p><strong>Artista (ícone):</strong> <a href="https://www.tiktok.com/@zezeguima.ttv" class="link">Zeze</a></p>
-
-      <h4>Extras</h4>
-      <p><strong>Sexualidade:</strong> demisexual</p>
-      <p><strong>Pronomes:</strong> ela/dela</p>
-
-      <p>
-        <strong>Personalidade:</strong> excêntrica, extrovertida e sempre procura se animar.
-      </p>
-
-      <p>
-        <strong>Perfil artístico:</strong> artista indie, gosta de música e tudo que envolve isso,
-        principalmente rock. Sempre quis aprender e hoje em dia compõe e canta.
-      </p>
-
-      <p>
-        <strong>Poder:</strong> voz hiper alta, capaz de ativar uma voz tão alta que pode até
-        danificar a audição dos outros ou chamar muita atenção.
-      </p>
-    </div>
-  </div>
-</div>
-<!-- MODAL TANGO -->
-<div class="modal" id="modal-tango">
-  <a href="#" class="modal-close">X</a>
-  <div class="modal-box">
-    <div class="modal-content">
-      <img src="tangocorpo.jpg" alt="Tango" />
-      <h3>Tango</h3>
-      <p><strong>Idade:</strong> 19 anos</p>
-      <p><strong>Fruta que representa:</strong> Pitanga</p>
-      <p><strong>Dubladora:</strong> <a href="https://vm.tiktok.com/ZS9jdAkPTVYCt-txsIM/" class="link">Dove Akaiha</a></p>
-      <p><strong>Artista (modelo):</strong> <a href="https://www.tiktok.com/@mih_studio_br" class="link">Mih Estelar</a></p>
-      <p><strong>Artista (ícone):</strong> <a href="https://www.tiktok.com/@zezeguima.ttv" class="link">Zeze</a></p>
-
-      <h4>Extras</h4>
-      <p><strong>Sexualidade:</strong> panssexual</p>
-      <p><strong>Pronomes:</strong> ele/dele</p>
-
-      <p>
-        <strong>Personalidade:</strong> meio zueiro, amigo de geral, bem humorado.
-      </p>
-
-      <p>
-        <strong>Poderes:</strong> Empatia sônica: sua voz (ele canta👅, “meu neném é artista”) pode causar perturbação ou conforto dependendo de seu humor.
-        Sua voz manipula emoções humanas.
-      </p>
-    </div>
-  </div>
-</div>
-</div>
-  </div>
+      const url = `https://wa.me/5511965964700?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+      
+      // Limpa formulário
+      event.target.reset();
+    }
+  </script>
 </body>
 </html>
